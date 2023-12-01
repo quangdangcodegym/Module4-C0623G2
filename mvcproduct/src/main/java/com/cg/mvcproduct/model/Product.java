@@ -4,7 +4,7 @@ package com.cg.mvcproduct.model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class Product implements Validator {
+public class Product {
 
     private Long id;
     private String name;
@@ -40,13 +40,5 @@ public class Product implements Validator {
         this.price = price;
     }
 
-    @Override
-    public boolean supports(Class<?> aClass) {
-        return false;
-    }
 
-    @Override
-    public void validate(Object o, Errors errors) {
-        String name = errors.getObjectName();
-    }
 }

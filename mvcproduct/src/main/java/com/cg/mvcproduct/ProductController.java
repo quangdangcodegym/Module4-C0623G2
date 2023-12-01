@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
+
     @GetMapping("")
     public String getAllProducts(Model model) {
         model.addAttribute("message", "HELLO EM YÊU");
@@ -23,7 +24,9 @@ public class ProductController {
         return "create";
     }
     @PostMapping("/new")
-    public String insertProduct(@ModelAttribute("product") Product product, BindingResult result){
+    public String insertProduct(@ModelAttribute("product") Product product, BindingResult result, Model model){
+
+
         return "create";
     }
 }
