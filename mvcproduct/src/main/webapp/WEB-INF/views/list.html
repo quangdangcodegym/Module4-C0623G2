@@ -1,10 +1,57 @@
+<!-- productForm.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create New Product</title>
 </head>
 <body>
-    <h1>KKKKKKKK</h1>
+<h1>Create New Product</h1>
+<form id="productForm">
+    <label for="productName">Product Name:</label>
+    <input type="text" id="productName" name="productName" /><br/><br/>
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" /><br/><br/>
+
+    <label for="description">Description:</label><br/>
+    <textarea id="description" name="description"></textarea><br/><br/>
+
+    <input type="submit" value="Create" />
+</form>
+
+<script>
+    document.getElementById('productForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Lấy dữ liệu từ form
+        var productName = document.getElementById('productName').value;
+        var price = document.getElementById('price').value;
+        var description = document.getElementById('description').value;
+
+        // Tạo object chứa dữ liệu sản phẩm
+        var productData = {
+            productName: productName,
+            price: price,
+            description: description
+        };
+
+        // Gửi dữ liệu sản phẩm tới backend sử dụng Fetch API
+        fetch('/product/new', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productData)
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data); // Log thông báo từ backend
+                alert(data); // Hiển thị thông báo từ backend
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
 </body>
 </html>
