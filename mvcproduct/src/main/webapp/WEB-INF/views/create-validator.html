@@ -6,11 +6,7 @@
 <body>
 
 <h2>Create Product</h2>
-<div th:if="${#fields.hasAnyErrors()}">
-  <ul>
-    <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-  </ul>
-</div>
+
 <form th:action="@{/create-product}" th:object="${product}" method="post">
   <label>ID:</label>
   <input type="text" th:field="*{id}" />

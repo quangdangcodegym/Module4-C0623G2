@@ -19,12 +19,29 @@ public class ProductController {
         return "list";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/new-custom")
     public String createProduct(){
         return "create";
     }
-    @PostMapping("/new")
+    @PostMapping("/new-custom")
     public String insertProduct(@ModelAttribute("product") Product product, BindingResult result, Model model){
+        if (product.getName().length() < 5) {
+            result.reject("username", null,
+                                "There is already an account registered with the same username");
+        }
+        if (product.getPrice() > 10 || product.getPrice() <0) {
+            result.reject("price", null,
+                    "Giá trong khoảng từ 0 - 10");
+        }
+        return "create";
+    }
+
+    @GetMapping("/new-validator")
+    public String createProductValidator(){
+        return "create";
+    }
+    @PostMapping("/new-validator")
+    public String insertProductValidator(@ModelAttribute("product") Product product, BindingResult result, Model model){
 
 
         return "create";
